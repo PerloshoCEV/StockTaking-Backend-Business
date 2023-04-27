@@ -28,7 +28,7 @@ public class MembershipController implements MembershipControllerInterface
 	
 	@Override
 	@PostMapping(path = "/membership")
-	public ApiResponse<T_Membership> createMembershipController(T_Membership newMembership) 
+	public ApiResponse<T_Membership> createEntityController(T_Membership newMembership) 
 	{
 		Metadata meta = new Metadata();
 		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
@@ -46,7 +46,7 @@ public class MembershipController implements MembershipControllerInterface
 
 	@Override
 	@GetMapping(path = "/allmemberships")
-	public ApiResponse<List<T_Membership>> readAllMembershipController() 
+	public ApiResponse<List<T_Membership>> readAllEntityController() 
 	{
 		Metadata meta = new Metadata();
 		ApiResponse<List<T_Membership>> response = 
@@ -58,7 +58,7 @@ public class MembershipController implements MembershipControllerInterface
 
 	@Override
 	@GetMapping(path = "/membership")
-	public ApiResponse<T_Membership> readMembershipIdController(Long id) 
+	public ApiResponse<T_Membership> readEntityIdController(Long id) 
 	{
 		Metadata meta = new Metadata();
 		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
@@ -73,7 +73,7 @@ public class MembershipController implements MembershipControllerInterface
 
 	@PutMapping(path = "/membership")
 	@Override
-	public ApiResponse<T_Membership> updateMembershipController(T_Membership membershipToModify) 
+	public ApiResponse<T_Membership> updateEntityController(T_Membership membershipToModify) 
 	{
 		Metadata meta = new Metadata();
 		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
@@ -88,7 +88,7 @@ public class MembershipController implements MembershipControllerInterface
 
 	@Override
 	@DeleteMapping(path = "/membership")
-	public ApiResponse<T_Membership> deleteMembershipId(Long id) 
+	public ApiResponse<T_Membership> deleteEntityId(Long id) 
 	{
 		Metadata meta = new Metadata();
 		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);

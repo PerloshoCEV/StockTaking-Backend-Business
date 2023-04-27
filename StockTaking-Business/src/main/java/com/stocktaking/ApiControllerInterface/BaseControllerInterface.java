@@ -16,7 +16,7 @@ public interface BaseControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> createMembershipController (@RequestBody T newMembership);
+	ApiResponse<T> createEntityController (@RequestBody T newEntity);
 	
 	/*
 		Método interfaz: Get Read (All)
@@ -24,7 +24,7 @@ public interface BaseControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<List<T>> readAllMembershipController ();
+	ApiResponse<List<T>> readAllEntityController ();
 	
 	/*
 		Método interfaz: Get Read (Por Id)
@@ -32,7 +32,7 @@ public interface BaseControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> readMembershipIdController (@RequestParam Long id);
+	ApiResponse<T> readEntityIdController (@RequestParam Long id);
 	
 	/*
 		Método interfaz: Put Update
@@ -40,7 +40,7 @@ public interface BaseControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> updateMembershipController(@RequestBody T membershipToModify);
+	ApiResponse<T> updateEntityController(@RequestBody T membershipToModify);
 	
 	/*
 		Método interfaz: Delete
@@ -48,5 +48,5 @@ public interface BaseControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> deleteMembershipId (@RequestParam Long id); 
+	ApiResponse<T> deleteEntityId (@RequestParam Long id); 
 }
