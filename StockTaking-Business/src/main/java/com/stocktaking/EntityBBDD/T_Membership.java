@@ -5,7 +5,6 @@ import java.util.List;
 import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.stocktaking.EntityInterface.EntityBaseInterface;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,7 +16,7 @@ import jakarta.persistence.Table;
 
 @Entity // Spring le dice al Gestor de Bases de Datos que la siguiente clase es una entidad (Tabla).
 @Table(name = "T_Membership")
-public class T_Membership implements EntityBaseInterface<T_Membership>
+public class T_Membership 
 {
 	/*
 		Zona de Atributos
