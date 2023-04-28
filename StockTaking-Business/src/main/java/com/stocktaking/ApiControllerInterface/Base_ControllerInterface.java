@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stocktaking.Response.ApiResponse;
 
 
-public interface BaseControllerInterface <T>
+public interface Base_ControllerInterface <T>
 {
 	/*
 		Método interfaz: Post Create

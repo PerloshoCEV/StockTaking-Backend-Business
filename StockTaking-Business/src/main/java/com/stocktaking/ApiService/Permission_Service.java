@@ -3,13 +3,18 @@ package com.stocktaking.ApiService;
 import java.util.List;
 import java.util.Optional;
 
-import com.stocktaking.ApiRepository.PermissionRepository;
-import com.stocktaking.ApiServiceInterface.BaseServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.stocktaking.ApiRepository.Permission_Repository;
+import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_Permission;
 
-public class PermissionService implements BaseServiceInterface<T_Permission>
+@Service
+public class Permission_Service implements Base_ServiceInterface<T_Permission>
 {
-	PermissionRepository repository;
+	@Autowired
+	Permission_Repository repository;
 	
 	@Override
 	public T_Permission createBaseService(T_Permission newPermission) 

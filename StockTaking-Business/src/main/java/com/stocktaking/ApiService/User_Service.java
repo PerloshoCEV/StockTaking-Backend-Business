@@ -3,13 +3,18 @@ package com.stocktaking.ApiService;
 import java.util.List;
 import java.util.Optional;
 
-import com.stocktaking.ApiRepository.UserRepository;
-import com.stocktaking.ApiServiceInterface.BaseServiceInterface;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.stocktaking.ApiRepository.User_Repository;
+import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_User;
 
-public class UserService implements BaseServiceInterface<T_User>
+@Service
+public class User_Service implements Base_ServiceInterface<T_User>
 {
-	UserRepository repository;
+	@Autowired
+	User_Repository repository;
 	
 	@Override
 	public T_User createBaseService(T_User newUser) 

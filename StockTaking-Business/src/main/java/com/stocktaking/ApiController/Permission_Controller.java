@@ -9,19 +9,19 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.stocktaking.ApiControllerInterface.PermissionControllerInterface;
-import com.stocktaking.ApiService.PermissionService;
+import com.stocktaking.ApiControllerInterface.Permission_ControllerInterface;
+import com.stocktaking.ApiService.Permission_Service;
 import com.stocktaking.EntityBBDD.T_Permission;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.Response.Metadata;
 
 @RestController
-public class PermissionController implements PermissionControllerInterface
+public class Permission_Controller implements Permission_ControllerInterface
 {
 	@Autowired
-	PermissionService permissionService;
+	Permission_Service permissionService;
 	
-	public PermissionController()
+	public Permission_Controller()
 	{
 		super();
 	}

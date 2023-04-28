@@ -1,4 +1,4 @@
-package com.stocktaking.StockTakingBusiness;
+package com.stocktaking;
 
 import org.springframework.boot.SpringApplication;
 

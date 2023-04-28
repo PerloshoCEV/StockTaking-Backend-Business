@@ -3,7 +3,7 @@ package com.stocktaking.ApiServiceInterface;
 import java.util.List;
 import java.util.Optional;
 
-public interface BaseServiceInterface <T>
+public interface Base_ServiceInterface <T>
 { 
 	public T createBaseService(T newBase);
 	

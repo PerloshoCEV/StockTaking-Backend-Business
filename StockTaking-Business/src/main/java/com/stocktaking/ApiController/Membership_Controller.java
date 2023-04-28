@@ -12,16 +12,16 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stocktaking.EntityBBDD.T_Membership;
 import com.stocktaking.Response.Metadata;
 import com.stocktaking.Response.ApiResponse;
-import com.stocktaking.ApiControllerInterface.MembershipControllerInterface;
-import com.stocktaking.ApiService.MembershipService;
+import com.stocktaking.ApiControllerInterface.Membership_ControllerInterface;
+import com.stocktaking.ApiService.Membership_Service;
 
 @RestController
-public class MembershipController implements MembershipControllerInterface
+public class Membership_Controller implements Membership_ControllerInterface
 {
 	@Autowired
-	MembershipService membershipService;
+	Membership_Service membershipService;
 
-	public MembershipController()
+	public Membership_Controller()
 	{
 		super();
 	}

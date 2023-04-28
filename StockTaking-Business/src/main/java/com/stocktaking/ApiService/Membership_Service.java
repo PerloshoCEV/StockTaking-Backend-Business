@@ -3,17 +3,18 @@ package com.stocktaking.ApiService;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.stocktaking.ApiServiceInterface.BaseServiceInterface;
+import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_Membership;
-import com.stocktaking.ApiRepository.MembershipRepository;
+import com.stocktaking.ApiRepository.Membership_Repository;
 
 @Service
-public class MembershipService implements BaseServiceInterface<T_Membership>
+public class Membership_Service implements Base_ServiceInterface<T_Membership>
 {
-
-	MembershipRepository repository;
+	@Autowired
+	Membership_Repository repository;
 	
 	@Override
 	public T_Membership createBaseService(T_Membership newMembership) 

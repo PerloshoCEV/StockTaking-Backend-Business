@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-import com.stocktaking.ApiControllerInterface.UserControllerInterface;
-import com.stocktaking.ApiService.UserService;
+import com.stocktaking.ApiControllerInterface.User_ControllerInterface;
+import com.stocktaking.ApiService.User_Service;
 import com.stocktaking.EntityBBDD.T_User;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.Response.Metadata;
 
-public class UserController implements UserControllerInterface
+public class User_Controller implements User_ControllerInterface
 {
 	@Autowired
-	UserService userService;
+	User_Service userService;
 	
-	public UserController()
+	public User_Controller()
 	{
 		super();
 	}
