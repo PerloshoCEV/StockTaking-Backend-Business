@@ -38,12 +38,12 @@ public class EmbKey_User_Permission implements Serializable
 	/*
 		Zona de Métodos Getters / Setters
 	*/
-	public Long getUsserId() 
+	public Long getUserId() 
 	{
 		return userId;
 	}
 
-	public void setUsserId(Long userId) 
+	public void setUserId(Long userId) 
 	{
 		this.userId = userId;
 	}

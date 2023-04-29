@@ -7,6 +7,8 @@ import java.util.List;
 
 import org.hibernate.annotations.NaturalId;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -38,7 +40,8 @@ public class T_Permission
 	String description;
 	
 	@OneToMany(mappedBy = "permission", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<T_User_Permission> users = new ArrayList<>();
+	@JsonIgnoreProperties("permission")
+	private List<T_UserPermission> users = new ArrayList<>();
 
 	/*
 		Zona de Constructores
@@ -60,7 +63,7 @@ public class T_Permission
 		this.description = description;
 	}
 
-	public T_Permission(Long id, String name, String description, List<T_User_Permission> users) {
+	public T_Permission(Long id, String name, String description, List<T_UserPermission> users) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -95,11 +98,11 @@ public class T_Permission
 		this.description = description;
 	}
 
-	public List<T_User_Permission> getUsers() {
+	public List<T_UserPermission> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<T_User_Permission> users) {
+	public void setUsers(List<T_UserPermission> users) {
 		this.users = users;
 	}
 

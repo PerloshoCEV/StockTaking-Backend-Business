@@ -7,13 +7,16 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.stocktaking.ApiControllerInterface.User_ControllerInterface;
 import com.stocktaking.ApiService.User_Service;
 import com.stocktaking.EntityBBDD.T_User;
+import com.stocktaking.Entity_DTO.User_Dto;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.Response.Metadata;
 
+@RestController
 public class User_Controller implements User_ControllerInterface
 {
 	@Autowired
@@ -26,10 +29,10 @@ public class User_Controller implements User_ControllerInterface
 	
 	@Override
 	@PostMapping(path = "/user")
-	public ApiResponse<T_User> createEntityController(T_User newUser) 
+	public ApiResponse<User_Dto> createEntityController(T_User newUser) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_User> response = new ApiResponse<T_User>(meta);
+		ApiResponse<User_Dto> response = new ApiResponse<User_Dto>(meta);
 				
 		if (newUser != null)
 		{
@@ -44,11 +47,11 @@ public class User_Controller implements User_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/allusers")
-	public ApiResponse<List<T_User>> readAllEntityController() 
+	public ApiResponse<List<User_Dto>> readAllEntityController() 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<List<T_User>> response = 
-			new ApiResponse<List<T_User>>
+		ApiResponse<List<User_Dto>> response = 
+			new ApiResponse<List<User_Dto>>
 				(userService.readBaseAllService(), meta);
 		
 		return response;
@@ -56,52 +59,43 @@ public class User_Controller implements User_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/user")
-	public ApiResponse<T_User> readEntityIdController(Long id) 
+	public ApiResponse<User_Dto> readEntityIdController(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_User> response = new ApiResponse<T_User>(meta);
+		ApiResponse<User_Dto> response = new ApiResponse<User_Dto>(meta);
 
-		
-		if(userService.findBaseByIdService(id).isPresent())
-		{
-			response.setResponse(userService.findBaseByIdService(id).get());
-		}
+		response.setResponse(userService.findBaseByIdService(id));
+
 		return response;
 	}
 
 	@PutMapping(path = "/user")
 	@Override
-	public ApiResponse<T_User> updateEntityController(T_User userToModify) 
+	public ApiResponse<User_Dto> updateEntityController(T_User userToModify) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_User> response = new ApiResponse<T_User>(meta);
+		ApiResponse<User_Dto> response = new ApiResponse<User_Dto>(meta);
 		
-		if(userService.findBaseByIdService(userToModify.getId()).isPresent())
-		{
-			response.setResponse(userService.updateBase(userToModify));
-		}
+		response.setResponse(userService.updateBase(userToModify));
 		
 		return response;
 	}
 
 	@Override
 	@DeleteMapping(path = "/user")
-	public ApiResponse<T_User> deleteEntityId(Long id) 
+	public ApiResponse<User_Dto> deleteEntityId(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_User> response = new ApiResponse<T_User>(meta);
+		ApiResponse<User_Dto> response = new ApiResponse<User_Dto>(meta);
+		
 		
 		if(id != null)
 		{
-			if (userService.findBaseByIdService(id).isPresent())
-			{
-				T_User userToDelete = userService.findBaseByIdService(id).get();
+			User_Dto userToDelete = userService.findBaseByIdService(id);
 				
-				response.setResponse(userService.deleteBaseId(userToDelete));
-			}
+			response.setResponse(userService.deleteBaseId(userToDelete));
+			
 		}
 		return response;
 	}
-
-
 }

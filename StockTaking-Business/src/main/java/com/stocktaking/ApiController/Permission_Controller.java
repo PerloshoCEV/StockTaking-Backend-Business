@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stocktaking.ApiControllerInterface.Permission_ControllerInterface;
 import com.stocktaking.ApiService.Permission_Service;
 import com.stocktaking.EntityBBDD.T_Permission;
+import com.stocktaking.Entity_DTO.Permission_Dto;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.Response.Metadata;
 
@@ -28,10 +29,10 @@ public class Permission_Controller implements Permission_ControllerInterface
 	
 	@Override
 	@PostMapping(path = "/permission")
-	public ApiResponse<T_Permission> createEntityController(T_Permission newPermission) 
+	public ApiResponse<Permission_Dto> createEntityController(T_Permission newPermission) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Permission> response = new ApiResponse<T_Permission>(meta);
+		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
 				
 		if (newPermission != null)
 		{
@@ -46,11 +47,11 @@ public class Permission_Controller implements Permission_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/allpermissions")
-	public ApiResponse<List<T_Permission>> readAllEntityController() 
+	public ApiResponse<List<Permission_Dto>> readAllEntityController() 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<List<T_Permission>> response = 
-			new ApiResponse<List<T_Permission>>
+		ApiResponse<List<Permission_Dto>> response = 
+			new ApiResponse<List<Permission_Dto>>
 				(permissionService.readBaseAllService(), meta);
 		
 		return response;
@@ -58,49 +59,42 @@ public class Permission_Controller implements Permission_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/permission")
-	public ApiResponse<T_Permission> readEntityIdController(Long id) 
+	public ApiResponse<Permission_Dto> readEntityIdController(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Permission> response = new ApiResponse<T_Permission>(meta);
+		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
 
-		
-		if(permissionService.findBaseByIdService(id).isPresent())
-		{
-			response.setResponse(permissionService.findBaseByIdService(id).get());
-		}
+		response.setResponse(permissionService.findBaseByIdService(id));
+
 		return response;
 	}
 
 	@PutMapping(path = "/permission")
 	@Override
-	public ApiResponse<T_Permission> updateEntityController(T_Permission permissionToModify) 
+	public ApiResponse<Permission_Dto> updateEntityController(T_Permission permissionToModify) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Permission> response = new ApiResponse<T_Permission>(meta);
+		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
 		
-		if(permissionService.findBaseByIdService(permissionToModify.getId()).isPresent())
-		{
-			response.setResponse(permissionService.updateBase(permissionToModify));
-		}
+		response.setResponse(permissionService.updateBase(permissionToModify));
 		
 		return response;
 	}
 
 	@Override
 	@DeleteMapping(path = "/permission")
-	public ApiResponse<T_Permission> deleteEntityId(Long id) 
+	public ApiResponse<Permission_Dto> deleteEntityId(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Permission> response = new ApiResponse<T_Permission>(meta);
+		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
+		
 		
 		if(id != null)
 		{
-			if (permissionService.findBaseByIdService(id).isPresent())
-			{
-				T_Permission permissionToDelete = permissionService.findBaseByIdService(id).get();
+			Permission_Dto permissionToDelete = permissionService.findBaseByIdService(id);
 				
-				response.setResponse(permissionService.deleteBaseId(permissionToDelete));
-			}
+			response.setResponse(permissionService.deleteBaseId(permissionToDelete));
+			
 		}
 		return response;
 	}

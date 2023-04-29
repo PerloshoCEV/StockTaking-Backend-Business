@@ -1,20 +1,19 @@
 package com.stocktaking.ApiServiceInterface;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface Base_ServiceInterface <T>
+public interface Base_ServiceInterface <T, DTO>
 { 
-	public T createBaseService(T newBase);
+	public DTO createBaseService(T newBase);
 	
 
-	public List<T> readBaseAllService();
+	public List<DTO> readBaseAllService();
 
-	public T readBaseId(Long id);
+	public DTO readBaseId(Long id);
 
-	public T updateBase(T membership);
+	public DTO updateBase(T entityToModify);
 
-	public T deleteBaseId(T membershipToDelete);
+	public DTO deleteBaseId(DTO entityToDelete);
 
-	public Optional<T> findBaseByIdService(Long id);
+	public DTO findBaseByIdService(Long id);
 }

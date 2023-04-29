@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.stocktaking.Response.ApiResponse;
 
 
-public interface Base_ControllerInterface <T>
+public interface Base_ControllerInterface <T, DTO>
 {
 	/*
 		Método interfaz: Post Create
@@ -16,7 +16,7 @@ public interface Base_ControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> createEntityController (@RequestBody T newEntity);
+	ApiResponse<DTO> createEntityController (@RequestBody T newEntity);
 	
 	/*
 		Método interfaz: Get Read (All)
@@ -24,7 +24,7 @@ public interface Base_ControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<List<T>> readAllEntityController ();
+	ApiResponse<List<DTO>> readAllEntityController ();
 	
 	/*
 		Método interfaz: Get Read (Por Id)
@@ -32,7 +32,7 @@ public interface Base_ControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> readEntityIdController (@RequestParam Long id);
+	ApiResponse<DTO> readEntityIdController (@RequestParam Long id);
 	
 	/*
 		Método interfaz: Put Update
@@ -40,7 +40,7 @@ public interface Base_ControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> updateEntityController(@RequestBody T membershipToModify);
+	ApiResponse<DTO> updateEntityController(@RequestBody T membershipToModify);
 	
 	/*
 		Método interfaz: Delete
@@ -48,5 +48,5 @@ public interface Base_ControllerInterface <T>
 		Objetivo:
 		Devuelve:
 	*/
-	ApiResponse<T> deleteEntityId (@RequestParam Long id); 
+	ApiResponse<DTO> deleteEntityId (@RequestParam Long id); 
 }

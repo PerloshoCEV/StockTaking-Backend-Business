@@ -31,6 +31,10 @@ public class T_Membership
 	String name;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
+	@Column (name = "Description", unique = false, nullable = false)
+	String description;
+	
+	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Price", unique = false, nullable = false)
 	Double price;
 	
@@ -89,6 +93,14 @@ public class T_Membership
 		this.name = name;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Double getPrice() {
 		return price;
 	}
@@ -105,9 +117,10 @@ public class T_Membership
 		this.users = users;
 	}
 
-	public void setAll(String newName, Double newPrice) 
+	public void setAll(String newName, String newDescription, Double newPrice) 
 	{
 		this.name = newName;
+		this.description = newDescription;
 		this.price = newPrice;
 	}
 	

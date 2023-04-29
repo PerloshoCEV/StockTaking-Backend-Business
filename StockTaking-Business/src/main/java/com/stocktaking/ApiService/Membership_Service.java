@@ -1,5 +1,6 @@
 package com.stocktaking.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,56 +9,90 @@ import org.springframework.stereotype.Service;
 
 import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_Membership;
+import com.stocktaking.Entity_DTO.Membership_Dto;
 import com.stocktaking.ApiRepository.Membership_Repository;
 
 @Service
-public class Membership_Service implements Base_ServiceInterface<T_Membership>
+public class Membership_Service implements Base_ServiceInterface<T_Membership, Membership_Dto>
 {
 	@Autowired
 	Membership_Repository repository;
 	
 	@Override
-	public T_Membership createBaseService(T_Membership newMembership) 
+	public Membership_Dto createBaseService(T_Membership newMembership) 
 	{
 		T_Membership membershipToSave = repository.save(newMembership);
-		return membershipToSave;
+		
+		Membership_Dto membershipDto = new Membership_Dto(membershipToSave);
+		
+		return membershipDto;
 	}
 
 	@Override
-	public List<T_Membership> readBaseAllService() 
+	public List<Membership_Dto> readBaseAllService() 
 	{
-		return repository.findAll();
+		List<T_Membership> listMemberships =  repository.findAll();
+		List<Membership_Dto> listMembershipsDto = new ArrayList<Membership_Dto>();
+		
+		for (T_Membership t_Membership : listMemberships) 
+		{
+			Membership_Dto membershipDto = new Membership_Dto(t_Membership);
+			listMembershipsDto.add(membershipDto);
+		}
+		
+		return listMembershipsDto;
+		
 	}
 
 	@Override
-	public T_Membership readBaseId(Long id) 
+	public Membership_Dto readBaseId(Long id) 
 	{
-		return repository.getReferenceById(id);
+		T_Membership membershipToRead = repository.getReferenceById(id);
+		
+		Membership_Dto membershipDto = new Membership_Dto(membershipToRead);
+		
+		return membershipDto;
 	}
 
 	@Override
-	public T_Membership updateBase(T_Membership membership) 
+	public Membership_Dto updateBase(T_Membership membership) 
 	{
-		T_Membership membershipToUpdated = repository.getReferenceById(membership.getId());
-		membershipToUpdated.setAll
+		T_Membership membershipToUpdate = repository.getReferenceById(membership.getId());
+		membershipToUpdate.setAll
 			(
-					membership.getName(),
-					membership.getPrice()
+				membership.getName(), 
+				membership.getDescription(),
+				membership.getPrice()
 			);
-		return repository.save(membershipToUpdated);
+		membershipToUpdate = repository.save(membershipToUpdate);
+		
+		Membership_Dto membershipDto = new Membership_Dto(membershipToUpdate);
+		
+		return membershipDto;
+		
 	}
 
 	@Override
-	public T_Membership deleteBaseId(T_Membership membershipToDelete) 
+	public Membership_Dto deleteBaseId(Membership_Dto membershipToDelete) 
 	{
-		repository.delete(repository.getReferenceById(membershipToDelete.getId()));
-		return membershipToDelete; 
+		
+		Long id = membershipToDelete.id;
+		
+		repository.delete(repository.getReferenceById(id));
+		
+		return membershipToDelete;
 	}
 
 	@Override
-	public Optional<T_Membership> findBaseByIdService(Long id) 
+	public Membership_Dto findBaseByIdService(Long id) 
 	{
-		return repository.findById(id);
+		Membership_Dto membershipDto = null;
+		Optional<T_Membership> finder = repository.findById(id);
+		if (finder.isPresent())
+		{
+			membershipDto = new Membership_Dto(finder.get());
+		}
+		
+		return membershipDto;
 	}
-	
 }

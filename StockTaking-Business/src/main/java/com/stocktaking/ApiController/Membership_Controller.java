@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.stocktaking.EntityBBDD.T_Membership;
+import com.stocktaking.Entity_DTO.Membership_Dto;
 import com.stocktaking.Response.Metadata;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.ApiControllerInterface.Membership_ControllerInterface;
@@ -28,10 +29,10 @@ public class Membership_Controller implements Membership_ControllerInterface
 	
 	@Override
 	@PostMapping(path = "/membership")
-	public ApiResponse<T_Membership> createEntityController(T_Membership newMembership) 
+	public ApiResponse<Membership_Dto> createEntityController(T_Membership newMembership) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
+		ApiResponse<Membership_Dto> response = new ApiResponse<Membership_Dto>(meta);
 				
 		if (newMembership != null)
 		{
@@ -46,11 +47,11 @@ public class Membership_Controller implements Membership_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/allmemberships")
-	public ApiResponse<List<T_Membership>> readAllEntityController() 
+	public ApiResponse<List<Membership_Dto>> readAllEntityController() 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<List<T_Membership>> response = 
-			new ApiResponse<List<T_Membership>>
+		ApiResponse<List<Membership_Dto>> response = 
+			new ApiResponse<List<Membership_Dto>>
 				(membershipService.readBaseAllService(), meta);
 		
 		return response;
@@ -58,51 +59,43 @@ public class Membership_Controller implements Membership_ControllerInterface
 
 	@Override
 	@GetMapping(path = "/membership")
-	public ApiResponse<T_Membership> readEntityIdController(Long id) 
+	public ApiResponse<Membership_Dto> readEntityIdController(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
+		ApiResponse<Membership_Dto> response = new ApiResponse<Membership_Dto>(meta);
 
-		
-		if(membershipService.findBaseByIdService(id).isPresent())
-		{
-			response.setResponse(membershipService.findBaseByIdService(id).get());
-		}
+		response.setResponse(membershipService.findBaseByIdService(id));
+
 		return response;
 	}
 
 	@PutMapping(path = "/membership")
 	@Override
-	public ApiResponse<T_Membership> updateEntityController(T_Membership membershipToModify) 
+	public ApiResponse<Membership_Dto> updateEntityController(T_Membership membershipToModify) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
+		ApiResponse<Membership_Dto> response = new ApiResponse<Membership_Dto>(meta);
 		
-		if(membershipService.findBaseByIdService(membershipToModify.getId()).isPresent())
-		{
-			response.setResponse(membershipService.updateBase(membershipToModify));
-		}
+		response.setResponse(membershipService.updateBase(membershipToModify));
 		
 		return response;
 	}
 
 	@Override
 	@DeleteMapping(path = "/membership")
-	public ApiResponse<T_Membership> deleteEntityId(Long id) 
+	public ApiResponse<Membership_Dto> deleteEntityId(Long id) 
 	{
 		Metadata meta = new Metadata();
-		ApiResponse<T_Membership> response = new ApiResponse<T_Membership>(meta);
+		ApiResponse<Membership_Dto> response = new ApiResponse<Membership_Dto>(meta);
+		
 		
 		if(id != null)
 		{
-			if (membershipService.findBaseByIdService(id).isPresent())
-			{
-				T_Membership membershipToDelete = membershipService.findBaseByIdService(id).get();
+			Membership_Dto membershipToDelete = membershipService.findBaseByIdService(id);
 				
-				response.setResponse(membershipService.deleteBaseId(membershipToDelete));
-			}
+			response.setResponse(membershipService.deleteBaseId(membershipToDelete));
+			
 		}
 		return response;
 	}
-
 }

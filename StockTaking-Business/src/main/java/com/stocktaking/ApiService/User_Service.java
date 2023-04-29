@@ -1,5 +1,6 @@
 package com.stocktaking.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,37 +10,55 @@ import org.springframework.stereotype.Service;
 import com.stocktaking.ApiRepository.User_Repository;
 import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_User;
+import com.stocktaking.Entity_DTO.User_Dto;
 
 @Service
-public class User_Service implements Base_ServiceInterface<T_User>
+public class User_Service implements Base_ServiceInterface<T_User, User_Dto>
 {
 	@Autowired
 	User_Repository repository;
 	
 	@Override
-	public T_User createBaseService(T_User newUser) 
+	public User_Dto createBaseService(T_User newUser) 
 	{
 		T_User userToSave = repository.save(newUser);
-		return userToSave;
+		
+		User_Dto userDto = new User_Dto(userToSave);
+		
+		return userDto;
 	}
 
 	@Override
-	public List<T_User> readBaseAllService() 
+	public List<User_Dto> readBaseAllService() 
 	{
-		return repository.findAll();
+		List<T_User> listUsers =  repository.findAll();
+		List<User_Dto> listUsersDto = new ArrayList<User_Dto>();
+		
+		for (T_User t_User : listUsers) 
+		{
+			User_Dto userDto = new User_Dto(t_User);
+			listUsersDto.add(userDto);
+		}
+		
+		return listUsersDto;
+		
 	}
 
 	@Override
-	public T_User readBaseId(Long id) 
+	public User_Dto readBaseId(Long id) 
 	{
-		return repository.getReferenceById(id);
+		T_User userToRead = repository.getReferenceById(id);
+		
+		User_Dto userDto = new User_Dto(userToRead);
+		
+		return userDto;
 	}
 
 	@Override
-	public T_User updateBase(T_User user) 
+	public User_Dto updateBase(T_User user) 
 	{
-		T_User userToUpdated = repository.getReferenceById(user.getId());
-		userToUpdated.setAll
+		T_User userToUpdate = repository.getReferenceById(user.getId());
+		userToUpdate.setAll
 			(
 				user.getName(), 
 				user.getLastName(),
@@ -49,20 +68,35 @@ public class User_Service implements Base_ServiceInterface<T_User>
 				user.getPassword(),
 				user.getMembership()
 			);
-		return repository.save(userToUpdated);
+		userToUpdate = repository.save(userToUpdate);
+		
+		User_Dto userDto = new User_Dto(userToUpdate);
+		
+		return userDto;
+		
 	}
 
 	@Override
-	public T_User deleteBaseId(T_User userToDelete) 
+	public User_Dto deleteBaseId(User_Dto userToDelete) 
 	{
-		repository.delete(repository.getReferenceById(userToDelete.getId()));
-		return userToDelete; 
+		
+		Long id = userToDelete.id;
+		
+		repository.delete(repository.getReferenceById(id));
+		
+		return userToDelete;
 	}
 
 	@Override
-	public Optional<T_User> findBaseByIdService(Long id) 
+	public User_Dto findBaseByIdService(Long id) 
 	{
-		return repository.findById(id);
+		User_Dto userDto = null;
+		Optional<T_User> finder = repository.findById(id);
+		if (finder.isPresent())
+		{
+			userDto = new User_Dto(finder.get());
+		}
+		
+		return userDto;
 	}
-
 }

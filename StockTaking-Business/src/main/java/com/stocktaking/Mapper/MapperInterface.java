@@ -3,7 +3,7 @@ package com.stocktaking.Mapper;
 /*
 	Todos los DTO van a implementar esta interface
 */
-public interface MapperInterface <ENTITY, DTO>
+public interface MapperInterface <ENTITY>
 {
-	boolean mapper(ENTITY entity, DTO dto);
+	boolean mapper(ENTITY entity);
 }

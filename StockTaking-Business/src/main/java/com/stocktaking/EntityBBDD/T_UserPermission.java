@@ -1,5 +1,8 @@
 package com.stocktaking.EntityBBDD;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -10,7 +13,7 @@ import jakarta.persistence.Table;
 
 @Entity // Spring le dice al Gestor de Bases de Datos que la siguiente clase es una entidad (Tabla).
 @Table(name = "T_User_Permission")
-public class T_User_Permission 
+public class T_UserPermission 
 {
 	/*
 		Zona de Atributos
@@ -18,10 +21,12 @@ public class T_User_Permission
 	@EmbeddedId
 	private EmbKey_User_Permission id;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("userId")
 	private T_User user;
 	
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@MapsId("permissionId")
 	private T_Permission permission;
@@ -32,19 +37,19 @@ public class T_User_Permission
 	/*
 		Zona de Constructores
 	*/
-	public T_User_Permission() 
+	public T_UserPermission() 
 	{
 		super();
 	}
 	
-	public T_User_Permission(T_User user, T_Permission permission, Integer level) {
+	public T_UserPermission(T_User user, T_Permission permission, Integer level) {
 		super();
 		this.user = user;
 		this.permission = permission;
 		this.level = level;
 	}
 	
-	public T_User_Permission(EmbKey_User_Permission id, T_User user, T_Permission permission, Integer level) 
+	public T_UserPermission(EmbKey_User_Permission id, T_User user, T_Permission permission, Integer level) 
 	{
 		super();
 		this.id = id;

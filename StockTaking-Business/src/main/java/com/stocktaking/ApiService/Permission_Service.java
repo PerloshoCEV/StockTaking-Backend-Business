@@ -1,5 +1,6 @@
 package com.stocktaking.ApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -9,54 +10,89 @@ import org.springframework.stereotype.Service;
 import com.stocktaking.ApiRepository.Permission_Repository;
 import com.stocktaking.ApiServiceInterface.Base_ServiceInterface;
 import com.stocktaking.EntityBBDD.T_Permission;
+import com.stocktaking.Entity_DTO.Permission_Dto;
 
 @Service
-public class Permission_Service implements Base_ServiceInterface<T_Permission>
+public class Permission_Service implements Base_ServiceInterface<T_Permission, Permission_Dto>
 {
 	@Autowired
 	Permission_Repository repository;
 	
 	@Override
-	public T_Permission createBaseService(T_Permission newPermission) 
+	public Permission_Dto createBaseService(T_Permission newPermission) 
 	{
 		T_Permission permissionToSave = repository.save(newPermission);
-		return permissionToSave;
+		
+		Permission_Dto permissionDto = new Permission_Dto(permissionToSave);
+		
+		return permissionDto;
 	}
 
 	@Override
-	public List<T_Permission> readBaseAllService() 
+	public List<Permission_Dto> readBaseAllService() 
 	{
-		return repository.findAll();
+		List<T_Permission> listPermissions =  repository.findAll();
+		List<Permission_Dto> listPermissionsDto = new ArrayList<Permission_Dto>();
+		
+		for (T_Permission t_Permission : listPermissions) 
+		{
+			Permission_Dto permissionDto = new Permission_Dto(t_Permission);
+			listPermissionsDto.add(permissionDto);
+		}
+		
+		return listPermissionsDto;
+		
 	}
 
 	@Override
-	public T_Permission readBaseId(Long id) 
+	public Permission_Dto readBaseId(Long id) 
 	{
-		return repository.getReferenceById(id);
+		T_Permission permissionToRead = repository.getReferenceById(id);
+		
+		Permission_Dto permissionDto = new Permission_Dto(permissionToRead);
+		
+		return permissionDto;
 	}
 
 	@Override
-	public T_Permission updateBase(T_Permission permission) 
+	public Permission_Dto updateBase(T_Permission permission) 
 	{
-		T_Permission permissionToUpdated = repository.getReferenceById(permission.getId());
-		permissionToUpdated.setAll
-		(
-				permission.getName(),
+		T_Permission permissionToUpdate = repository.getReferenceById(permission.getId());
+		permissionToUpdate.setAll
+			(
+				permission.getName(), 
 				permission.getDescription()
-		);
-		return repository.save(permissionToUpdated);
+			);
+		permissionToUpdate = repository.save(permissionToUpdate);
+		
+		Permission_Dto permissionDto = new Permission_Dto(permissionToUpdate);
+		
+		return permissionDto;
+		
 	}
 
 	@Override
-	public T_Permission deleteBaseId(T_Permission permissionToDelete) 
+	public Permission_Dto deleteBaseId(Permission_Dto permissionToDelete) 
 	{
-		repository.delete(repository.getReferenceById(permissionToDelete.getId()));
-		return permissionToDelete; 
+		
+		Long id = permissionToDelete.id;
+		
+		repository.delete(repository.getReferenceById(id));
+		
+		return permissionToDelete;
 	}
 
 	@Override
-	public Optional<T_Permission> findBaseByIdService(Long id) 
+	public Permission_Dto findBaseByIdService(Long id) 
 	{
-		return repository.findById(id);
+		Permission_Dto permissionDto = null;
+		Optional<T_Permission> finder = repository.findById(id);
+		if (finder.isPresent())
+		{
+			permissionDto = new Permission_Dto(finder.get());
+		}
+		
+		return permissionDto;
 	}
+
 }
