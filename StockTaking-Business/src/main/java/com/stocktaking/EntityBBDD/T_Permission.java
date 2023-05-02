@@ -27,7 +27,7 @@ public class T_Permission
 		Zona de Atributos
 	*/
 	@Id // Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable java será el Atributo / Campo clave de la entidad.
-	@GeneratedValue(strategy = GenerationType.SEQUENCE) // Spring JPA le dice al Gestor de Bases de Datos que el Atributo será autogenerado.
+	@GeneratedValue(strategy = GenerationType.TABLE) // Spring JPA le dice al Gestor de Bases de Datos que el Atributo será autogenerado.
 	Long id; // Variable - Atributo / Campo -> id (Primary Key).
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
@@ -41,7 +41,7 @@ public class T_Permission
 	
 	@OneToMany(mappedBy = "permission", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonIgnoreProperties("permission")
-	private List<T_UserPermission> users = new ArrayList<>();
+	private List<T_ProjectUserPermission> projectUsers = new ArrayList<>();
 
 	/*
 		Zona de Constructores
@@ -63,12 +63,12 @@ public class T_Permission
 		this.description = description;
 	}
 
-	public T_Permission(Long id, String name, String description, List<T_UserPermission> users) {
+	public T_Permission(Long id, String name, String description, List<T_ProjectUserPermission> projectUsers) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.description = description;
-		this.users = users;
+		this.projectUsers = projectUsers;
 	}
 
 	/*
@@ -98,12 +98,12 @@ public class T_Permission
 		this.description = description;
 	}
 
-	public List<T_UserPermission> getUsers() {
-		return users;
+	public List<T_ProjectUserPermission> getUsers() {
+		return projectUsers;
 	}
 
-	public void setUsers(List<T_UserPermission> users) {
-		this.users = users;
+	public void setUsers(List<T_ProjectUserPermission> users) {
+		this.projectUsers = users;
 	}
 
 	public void setAll(String newName, String newDescription) 

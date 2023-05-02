@@ -7,10 +7,13 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
-public class EmbKey_User_Permission implements Serializable
+public class EmbKey_ProjectUserPermission implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
+	@Column (name = "Project_ID")
+	private Long projectId;
+	
 	@Column (name = "User_ID")
 	private Long userId;
 	
@@ -21,13 +24,13 @@ public class EmbKey_User_Permission implements Serializable
 		Zona de Constructores
 	*/
 	// Constructor Vacío ()
-	public EmbKey_User_Permission() 
+	public EmbKey_ProjectUserPermission() 
 	{
 		super();
 	}
 
 	// Constructor completo ()
-	public EmbKey_User_Permission(Long userId, Long permissionId) 
+	public EmbKey_ProjectUserPermission(Long userId, Long permissionId, Long projectId) 
 	{
 		super();
 		this.userId = userId;
@@ -64,6 +67,14 @@ public class EmbKey_User_Permission implements Serializable
 		this.permissionId = permissionId;
 	}
 	
+	public Long getProjectId() {
+		return this.projectId;
+	}
+
+	public void setProjectId(Long projectId) {
+		this.projectId = projectId;
+	}
+
 	/*
 		Zona de Métodos a implementar
 	*/
@@ -77,7 +88,7 @@ public class EmbKey_User_Permission implements Serializable
         if (other == null || getClass() != other.getClass())
             return false;
  
-        EmbKey_User_Permission that = (EmbKey_User_Permission) other;
+        EmbKey_ProjectUserPermission that = (EmbKey_ProjectUserPermission) other;
         return Objects.equals(userId, that.userId) &&
                Objects.equals(permissionId, that.permissionId);
     }

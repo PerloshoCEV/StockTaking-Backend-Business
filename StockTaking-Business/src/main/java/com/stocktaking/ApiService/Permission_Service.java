@@ -21,9 +21,18 @@ public class Permission_Service implements Base_ServiceInterface<T_Permission, P
 	@Override
 	public Permission_Dto createBaseService(T_Permission newPermission) 
 	{
-		T_Permission permissionToSave = repository.save(newPermission);
+		Permission_Dto permissionDto = null;
+		try
+		{
+			T_Permission permissionToSave = repository.save(newPermission);
+			
+			permissionDto = new Permission_Dto(permissionToSave);
+		}
+		catch(Exception e)
+		{
+			
+		}
 		
-		Permission_Dto permissionDto = new Permission_Dto(permissionToSave);
 		
 		return permissionDto;
 	}
@@ -41,15 +50,18 @@ public class Permission_Service implements Base_ServiceInterface<T_Permission, P
 		}
 		
 		return listPermissionsDto;
-		
 	}
 
 	@Override
 	public Permission_Dto readBaseId(Long id) 
 	{
 		T_Permission permissionToRead = repository.getReferenceById(id);
+		Permission_Dto permissionDto = null;
 		
-		Permission_Dto permissionDto = new Permission_Dto(permissionToRead);
+		if (permissionToRead != null)
+		{
+			permissionDto = new Permission_Dto(permissionToRead);
+		}
 		
 		return permissionDto;
 	}
@@ -58,14 +70,24 @@ public class Permission_Service implements Base_ServiceInterface<T_Permission, P
 	public Permission_Dto updateBase(T_Permission permission) 
 	{
 		T_Permission permissionToUpdate = repository.getReferenceById(permission.getId());
+		Permission_Dto permissionDto = null;
+		
 		permissionToUpdate.setAll
 			(
 				permission.getName(), 
 				permission.getDescription()
 			);
-		permissionToUpdate = repository.save(permissionToUpdate);
+		try
+		{
+			permissionToUpdate = repository.save(permissionToUpdate);
+			
+			permissionDto = new Permission_Dto(permissionToUpdate);
+		}
+		catch (Exception e)
+		{
+			
+		}
 		
-		Permission_Dto permissionDto = new Permission_Dto(permissionToUpdate);
 		
 		return permissionDto;
 		
@@ -74,10 +96,16 @@ public class Permission_Service implements Base_ServiceInterface<T_Permission, P
 	@Override
 	public Permission_Dto deleteBaseId(Permission_Dto permissionToDelete) 
 	{
+		Long id = permissionToDelete.getId();
 		
-		Long id = permissionToDelete.id;
-		
-		repository.delete(repository.getReferenceById(id));
+		try
+		{
+			repository.delete(repository.getReferenceById(id));
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
 		
 		return permissionToDelete;
 	}

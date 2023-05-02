@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "30af6ca3-3987-4798-97c6-629ffcbb5cd0",
+		"name": "Busines_User_Connections",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15014217"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/busines/signup?email=b@b.b&password=andres",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"signup"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "b@b.b"
+						},
+						{
+							"key": "password",
+							"value": "andres"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "andres",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"andres_hernan_segovia_m-tsapp1oa2122@cev.com\",\r\n    \"password\": \"andres\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/busines/login?email=andres_hernan_segovia_m-tsapp1oa2122@cev.com&password=andres",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"login"
+					],
+					"query": [
+						{
+							"key": "email",
+							"value": "andres_hernan_segovia_m-tsapp1oa2122@cev.com"
+						},
+						{
+							"key": "password",
+							"value": "andres"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

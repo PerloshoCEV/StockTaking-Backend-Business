@@ -1,9 +1,9 @@
 package com.stocktaking.Entity_DTO;
 
-import com.stocktaking.EntityBBDD.T_Membership;
+import com.stocktaking.EntityBBDD.T_Project;
 import com.stocktaking.Mapper.MapperInterface;
 
-public class Membership_Dto implements MapperInterface<T_Membership>
+public class Project_Dto implements MapperInterface<T_Project>
 {
 	/*
 		Zona de Atributos
@@ -11,23 +11,32 @@ public class Membership_Dto implements MapperInterface<T_Membership>
 	private Long id;
 	private String name;
 	private String description;
-	private Double price;
+	private String url;
 	
 	/*
 		Zona de Constructores
 	*/
-	public Membership_Dto()
+	public Project_Dto() 
 	{
 		
 	}
 	
-	public Membership_Dto(T_Membership entity)
+	public Project_Dto(Long id, String name, String description, String url) 
+	{
+		this.id = id;
+		this.name = name;
+		this.description = description;
+		this.url = url;
+	}
+	
+	public Project_Dto(T_Project entity) 
 	{
 		this.mapper(entity);
 	}
 	
-	
-	
+	/*
+		Zona de Getters & Setters
+	*/
 	public Long getId() {
 		return id;
 	}
@@ -52,26 +61,26 @@ public class Membership_Dto implements MapperInterface<T_Membership>
 		this.description = description;
 	}
 
-	public Double getPrice() {
-		return price;
+	public String getUrl() {
+		return url;
 	}
 
-	public void setPrice(Double price) {
-		this.price = price;
+	public void setUrl(String url) {
+		this.url = url;
 	}
-
+	
 	/*
 		Zona de Implementaciones de interfaces
 	*/
 	@Override
-	public boolean mapper(T_Membership entity) 
+	public boolean mapper(T_Project entity) 
 	{
 		try
 		{
 			this.id = entity.getId();
 			this.name = entity.getName();
 			this.description = entity.getDescription();
-			this.price = entity.getPrice();
+			this.url = entity.getUrl();
 		}
 		catch (Exception e) 
 		{
@@ -80,4 +89,5 @@ public class Membership_Dto implements MapperInterface<T_Membership>
 		
 		return true;
 	}
+
 }

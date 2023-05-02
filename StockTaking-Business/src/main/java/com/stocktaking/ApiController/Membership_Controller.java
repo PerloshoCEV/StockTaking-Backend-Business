@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.stocktaking.EntityBBDD.T_Membership;
 import com.stocktaking.Entity_DTO.Membership_Dto;
+import com.stocktaking.Enum.MessageResult;
 import com.stocktaking.Response.Metadata;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.ApiControllerInterface.Membership_ControllerInterface;
@@ -40,6 +41,11 @@ public class Membership_Controller implements Membership_ControllerInterface
 			if(newMembership.getId() == null)
 			{
 				response.setResponse(membershipService.createBaseService(newMembership));
+				
+				if (response.getResponse() != null)
+				{
+					response.setMessage(MessageResult.Success);
+				}
 			}
 		}
 		return response;
@@ -66,6 +72,11 @@ public class Membership_Controller implements Membership_ControllerInterface
 
 		response.setResponse(membershipService.findBaseByIdService(id));
 
+		if (response.getResponse() != null)
+		{
+			response.setMessage(MessageResult.Success);
+		}
+		
 		return response;
 	}
 
@@ -77,6 +88,11 @@ public class Membership_Controller implements Membership_ControllerInterface
 		ApiResponse<Membership_Dto> response = new ApiResponse<Membership_Dto>(meta);
 		
 		response.setResponse(membershipService.updateBase(membershipToModify));
+		
+		if (response.getResponse() != null)
+		{
+			response.setMessage(MessageResult.Success);
+		}
 		
 		return response;
 	}
@@ -95,6 +111,10 @@ public class Membership_Controller implements Membership_ControllerInterface
 				
 			response.setResponse(membershipService.deleteBaseId(membershipToDelete));
 			
+			if (response.getResponse() != null)
+			{
+				response.setMessage(MessageResult.Success);
+			}
 		}
 		return response;
 	}

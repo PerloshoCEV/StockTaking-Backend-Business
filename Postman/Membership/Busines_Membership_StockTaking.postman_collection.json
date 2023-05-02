@@ -1,0 +1,135 @@
+{
+	"info": {
+		"_postman_id": "8e9da461-c68f-48ff-91ce-ecab23cc377a",
+		"name": "Busines_Membership_StockTaking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15014217"
+	},
+	"item": [
+		{
+			"name": "CreateMembership",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"name\": \"Contributor\",\r\n    \"description\": \"Opción de colaboración, sujeta a medidas especiales.\",\r\n    \"price\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/busines/membership",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"membership"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReadAllMembership",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/busines/allmemberships",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"allmemberships"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ReadMembershipID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/busines/membership?id=52",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"membership"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "52"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteMembershipID",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/busines/membership?id=102",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"membership"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "102"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateMembership",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"id\": 53,\r\n\t\"name\": \"Gold\",\r\n    \"description\": \"Opción económica con los servícios más relevantes.\",\r\n    \"price\": \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/busines/membership",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"busines",
+						"membership"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

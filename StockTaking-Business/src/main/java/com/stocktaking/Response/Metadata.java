@@ -27,13 +27,5 @@ public class Metadata
 		this.pagination = pagination;
 	}
 
-	public MessageResult getMessage() 
-	{
-		return message;
-	}
-
-	public void setMessage(MessageResult message) 
-	{
-		this.message = message;
-	}
+	
 }

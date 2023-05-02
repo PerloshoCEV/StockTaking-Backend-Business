@@ -12,14 +12,19 @@ import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
 @Entity // Spring le dice al Gestor de Bases de Datos que la siguiente clase es una entidad (Tabla).
-@Table(name = "T_User_Permission")
-public class T_UserPermission 
+@Table(name = "T_Project_User_Permission")
+public class T_ProjectUserPermission 
 {
 	/*
 		Zona de Atributos
 	*/
 	@EmbeddedId
-	private EmbKey_User_Permission id;
+	private EmbKey_ProjectUserPermission id;
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
+	@MapsId("projectId")
+	private T_Project project;
 	
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -37,19 +42,20 @@ public class T_UserPermission
 	/*
 		Zona de Constructores
 	*/
-	public T_UserPermission() 
+	public T_ProjectUserPermission() 
 	{
 		super();
 	}
 	
-	public T_UserPermission(T_User user, T_Permission permission, Integer level) {
+	public T_ProjectUserPermission(T_Project project, T_User user, T_Permission permission, Integer level) {
 		super();
+		this.project = project;
 		this.user = user;
 		this.permission = permission;
 		this.level = level;
 	}
 	
-	public T_UserPermission(EmbKey_User_Permission id, T_User user, T_Permission permission, Integer level) 
+	public T_ProjectUserPermission(EmbKey_ProjectUserPermission id, T_User user, T_Permission permission, Integer level) 
 	{
 		super();
 		this.id = id;
@@ -61,36 +67,54 @@ public class T_UserPermission
 	/*
 		Zona de Getters & Setters
 	*/
-	public EmbKey_User_Permission getId() {
+	public EmbKey_ProjectUserPermission getId() 
+	{
 		return id;
 	}
 
-	public void setId(EmbKey_User_Permission id) {
+	public void setId(EmbKey_ProjectUserPermission id) 
+	{
 		this.id = id;
 	}
 
-	public T_User getUser() {
+	public T_User getUser() 
+	{
 		return user;
 	}
 
-	public void setUser(T_User user) {
+	public void setUser(T_User user) 
+	{
 		this.user = user;
 	}
 
-	public T_Permission getPermission() {
+	public T_Permission getPermission() 
+	{
 		return permission;
 	}
 
-	public void setPermission(T_Permission permission) {
+	public void setPermission(T_Permission permission) 
+	{
 		this.permission = permission;
 	}
 
-	public Integer getLevel() {
+	public Integer getLevel() 
+	{
 		return level;
 	}
 
-	public void setLevel(Integer level) {
+	public void setLevel(Integer level) 
+	{
 		this.level = level;
+	}
+
+	public T_Project getProject() 
+	{
+		return project;
+	}
+
+	public void setProject(T_Project project) 
+	{
+		this.project = project;
 	}
 	
 	

@@ -1,19 +1,19 @@
 {
 	"info": {
-		"_postman_id": "8e9da461-c68f-48ff-91ce-ecab23cc377a",
-		"name": "U_Membership_StockTaking",
+		"_postman_id": "b92e3346-f5fa-4206-a151-bee77e308f74",
+		"name": "Busines_User_StockTaking",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "15014217"
 	},
 	"item": [
 		{
-			"name": "CreateMembership",
+			"name": "CreateUser",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\": null,\r\n\t\"name\": \"Admin_Sistema\",\r\n    \"price\": 0\r\n}",
+					"raw": "{\r\n\t\"name\": \"Diógenes\",\r\n    \"lastName\": \"Alcina\",\r\n    \"secondLastName\": \"López\",\r\n    \"email\": \"diogenes_alcina_m-tsapp1oa2122@cev.com\",\r\n    \"age\": 35,\r\n    \"password\": \"Dio\",\r\n    \"membership\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -21,57 +21,57 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/stocktaking/membership",
+					"raw": "localhost:8080/busines/user",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stocktaking",
-						"membership"
+						"busines",
+						"user"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "ReadAllMembership",
+			"name": "ReadAllUser",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stocktaking/memberships",
+					"raw": "localhost:8080/busines/allusers",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stocktaking",
-						"memberships"
+						"busines",
+						"allusers"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "ReadMembershipID",
+			"name": "ReadUserID",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stocktaking/membership?id=1552",
+					"raw": "localhost:8080/busines/user?id=1",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stocktaking",
-						"membership"
+						"busines",
+						"user"
 					],
 					"query": [
 						{
 							"key": "id",
-							"value": "1552"
+							"value": "1"
 						}
 					]
 				}
@@ -79,24 +79,24 @@
 			"response": []
 		},
 		{
-			"name": "DeleteMembershipID",
+			"name": "DeleteUserID",
 			"request": {
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "localhost:8080/stocktaking/membership?id=1552",
+					"raw": "localhost:8080/busines/user?id=2",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stocktaking",
-						"membership"
+						"busines",
+						"user"
 					],
 					"query": [
 						{
 							"key": "id",
-							"value": "1552"
+							"value": "2"
 						}
 					]
 				}
@@ -104,13 +104,13 @@
 			"response": []
 		},
 		{
-			"name": "UpdateMembership",
+			"name": "UpdateUser",
 			"request": {
 				"method": "PUT",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n\t\"id\": 1,\r\n\t\"name\": \"Administrador\",\r\n    \"price\": \"10\"\r\n}",
+					"raw": "{\r\n\t\"id\": 2,\r\n\t\"name\": \"Andrés\",\r\n    \"lastName\": \"Hernan\",\r\n    \"secondLastName\": \"Segovia\",\r\n    \"email\": \"andres_hernan_segovia_m-tsapp1oa2122@cev.com\",\r\n    \"age\": 25,\r\n    \"password\": \"andres\",\r\n    \"membership\": null\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -118,14 +118,14 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8080/stocktaking/membership",
+					"raw": "localhost:8080/busines/user",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"stocktaking",
-						"membership"
+						"busines",
+						"user"
 					]
 				}
 			},

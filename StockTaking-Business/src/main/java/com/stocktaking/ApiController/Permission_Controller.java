@@ -13,6 +13,7 @@ import com.stocktaking.ApiControllerInterface.Permission_ControllerInterface;
 import com.stocktaking.ApiService.Permission_Service;
 import com.stocktaking.EntityBBDD.T_Permission;
 import com.stocktaking.Entity_DTO.Permission_Dto;
+import com.stocktaking.Enum.MessageResult;
 import com.stocktaking.Response.ApiResponse;
 import com.stocktaking.Response.Metadata;
 
@@ -40,6 +41,11 @@ public class Permission_Controller implements Permission_ControllerInterface
 			if(newPermission.getId() == null)
 			{
 				response.setResponse(permissionService.createBaseService(newPermission));
+				
+				if (response.getResponse() != null)
+				{
+					response.setMessage(MessageResult.Success);
+				}
 			}
 		}
 		return response;
@@ -65,7 +71,12 @@ public class Permission_Controller implements Permission_ControllerInterface
 		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
 
 		response.setResponse(permissionService.findBaseByIdService(id));
-
+		
+		if (response.getResponse() != null)
+		{
+			response.setMessage(MessageResult.Success);
+		}
+		
 		return response;
 	}
 
@@ -78,6 +89,10 @@ public class Permission_Controller implements Permission_ControllerInterface
 		
 		response.setResponse(permissionService.updateBase(permissionToModify));
 		
+		if (response.getResponse() != null)
+		{
+			response.setMessage(MessageResult.Success);
+		}
 		return response;
 	}
 
@@ -88,15 +103,20 @@ public class Permission_Controller implements Permission_ControllerInterface
 		Metadata meta = new Metadata();
 		ApiResponse<Permission_Dto> response = new ApiResponse<Permission_Dto>(meta);
 		
-		
 		if(id != null)
 		{
-			Permission_Dto permissionToDelete = permissionService.findBaseByIdService(id);
+			if (permissionService.findBaseByIdService(id) != null)
+			{
+				Permission_Dto permissionToDelete = permissionService.findBaseByIdService(id);
 				
-			response.setResponse(permissionService.deleteBaseId(permissionToDelete));
-			
+				response.setResponse(permissionService.deleteBaseId(permissionToDelete));
+				
+				if (response.getResponse() != null)
+				{
+					response.setMessage(MessageResult.Success);
+				}
+			}
 		}
 		return response;
 	}
-
 }

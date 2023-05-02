@@ -76,9 +76,16 @@ public class Membership_Service implements Base_ServiceInterface<T_Membership, M
 	public Membership_Dto deleteBaseId(Membership_Dto membershipToDelete) 
 	{
 		
-		Long id = membershipToDelete.id;
+		Long id = membershipToDelete.getId();
 		
-		repository.delete(repository.getReferenceById(id));
+		try
+		{
+			repository.delete(repository.getReferenceById(id));
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
 		
 		return membershipToDelete;
 	}

@@ -19,48 +19,48 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity // Spring le dice al Gestor de Bases de Datos que la siguiente clase es una entidad (Tabla).
-@Table(name = "T_user")
+@Table(name = "T_User")
 public class T_User 
 {
 	/*
 		Zona de Atributos
 	*/
 	@Id // Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable java será el Atributo / Campo clave de la entidad.
-	@GeneratedValue(strategy = GenerationType.SEQUENCE) // Spring JPA le dice al Gestor de Bases de Datos que el Atributo será autogenerado.
-	Long id; // Variable - Atributo / Campo -> id (Primary Key).
+	@GeneratedValue(strategy = GenerationType.TABLE) // Spring JPA le dice al Gestor de Bases de Datos que el Atributo será autogenerado.
+	private Long id; // Variable - Atributo / Campo -> id (Primary Key).
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Name", unique = false, nullable = true)
-	String name;
+	private String name;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "LastName", unique = false, nullable = true)
-	String lastName;
+	private String lastName;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "SecondLastName", unique = false, nullable = true)
-	String secondLastName;
+	private String secondLastName;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Email", unique = true, nullable = false)
 	@NaturalId
-	String email;
+	private String email;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Age", unique = false, nullable = true)
-	Integer age;
+	private Integer age;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Password", unique = false, nullable = false)
-	String password;
+	private String password;
 	
 	@ManyToOne()
 	@JsonBackReference
-	T_Membership membership;
+	private T_Membership membership;
 	
 	@OneToMany(mappedBy = "user")
 	@JsonIgnoreProperties("user")
-	List<T_UserPermission> permissions = new ArrayList<>();
+	private List<T_ProjectUserPermission> projectPermissions = new ArrayList<>();
 
 	/*
 		Zona de Constructores
@@ -83,7 +83,7 @@ public class T_User
 	}
 
 	public T_User(Long id, String name, String lastName, String secondLastName, String email, Integer age,
-			String password, T_Membership membership, List<T_UserPermission> permissions) {
+			String password, T_Membership membership, List<T_ProjectUserPermission> projectPermissions) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -93,7 +93,7 @@ public class T_User
 		this.age = age;
 		this.password = password;
 		this.membership = membership;
-		this.permissions = permissions;
+		this.projectPermissions = projectPermissions;
 	}
 
 	/*
@@ -163,12 +163,12 @@ public class T_User
 		this.membership = membership;
 	}
 
-	public List<T_UserPermission> getPermissions() {
-		return permissions;
+	public List<T_ProjectUserPermission> getPermissions() {
+		return projectPermissions;
 	}
 
-	public void setPermissions(List<T_UserPermission> permissions) {
-		this.permissions = permissions;
+	public void setPermissions(List<T_ProjectUserPermission> permissions) {
+		this.projectPermissions = permissions;
 	}
 
 	public void setAll

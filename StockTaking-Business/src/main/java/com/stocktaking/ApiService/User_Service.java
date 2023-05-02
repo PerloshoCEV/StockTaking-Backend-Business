@@ -80,9 +80,16 @@ public class User_Service implements Base_ServiceInterface<T_User, User_Dto>
 	public User_Dto deleteBaseId(User_Dto userToDelete) 
 	{
 		
-		Long id = userToDelete.id;
+		Long id = userToDelete.getId();
 		
-		repository.delete(repository.getReferenceById(id));
+		try
+		{
+			repository.delete(repository.getReferenceById(id));
+		}
+		catch (Exception e)
+		{
+			return null;
+		}
 		
 		return userToDelete;
 	}
@@ -98,5 +105,15 @@ public class User_Service implements Base_ServiceInterface<T_User, User_Dto>
 		}
 		
 		return userDto;
+	}
+	
+	public Optional<T_User> findUserByEmailService(String email) 
+	{
+		return repository.findByEmail(email);
+	}
+	
+	public Optional<T_User> findUserByEmailPasswordService(String email, String password) 
+	{
+		return repository.findByEmailAndPassword(email, password);
 	}
 }
