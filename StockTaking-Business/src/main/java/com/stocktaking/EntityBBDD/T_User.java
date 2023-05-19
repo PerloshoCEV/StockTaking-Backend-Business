@@ -43,7 +43,6 @@ public class T_User
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
 	@Column (name = "Email", unique = true, nullable = false)
-	@NaturalId
 	private String email;
 	
 	// Spring JPA le dice al Gestor de Bases de Datos que la siguiente variable Java será un Atributo / Campo de la entidad.
