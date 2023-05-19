@@ -88,13 +88,15 @@ public class EmbKey_ProjectUserPermission implements Serializable
         if (other == null || getClass() != other.getClass())
             return false;
  
-        EmbKey_ProjectUserPermission that = (EmbKey_ProjectUserPermission) other;
+        EmbKey_ProjectUserPermission that = 
+        		(EmbKey_ProjectUserPermission) other;
         return Objects.equals(userId, that.userId) &&
                Objects.equals(permissionId, that.permissionId);
     }
  
     @Override
-    public int hashCode() {
+    public int hashCode() 
+    {
         return Objects.hash(userId, permissionId);
     }
 }

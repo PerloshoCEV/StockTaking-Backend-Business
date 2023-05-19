@@ -47,7 +47,8 @@ public class T_ProjectUserPermission
 		super();
 	}
 	
-	public T_ProjectUserPermission(T_Project project, T_User user, T_Permission permission, Integer level) {
+	public T_ProjectUserPermission(T_Project project, T_User user, T_Permission permission, Integer level) 
+	{
 		super();
 		this.project = project;
 		this.user = user;
