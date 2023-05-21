@@ -14,7 +14,7 @@ import com.busines.Entity_DTO.ProjectUserPermission_Dto;
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.stocktaking"})
+@ComponentScan(basePackages = {"com.busines"})
 public class ProjectUserPermission_SQL_Repository 
 {
 	// Pillo la url de la BBDD desde el application.properties
