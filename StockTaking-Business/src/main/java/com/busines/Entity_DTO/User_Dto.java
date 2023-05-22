@@ -1,5 +1,6 @@
 package com.busines.Entity_DTO;
 
+import com.busines.EntityBBDD.T_Membership;
 import com.busines.EntityBBDD.T_User;
 import com.busines.Mapper.MapperInterface;
 
@@ -14,6 +15,7 @@ public class User_Dto implements MapperInterface<T_User>
 	private String secondLastName;
 	private String email;
 	private Integer age;
+	private T_Membership membership;
 	
 	/*
 		Zona de Constructores
@@ -30,16 +32,17 @@ public class User_Dto implements MapperInterface<T_User>
 		String lastName, 
 		String secondLastName, 
 		String email, 
-		Integer age
+		Integer age,
+		T_Membership membership
 	) 
 	{
-		super();
 		this.id = id;
 		this.name = name;
 		this.lastName = lastName;
 		this.secondLastName = secondLastName;
 		this.email = email;
 		this.age = age;
+		this.membership = membership;
 	}
 
 	public User_Dto (T_User entity)
@@ -99,6 +102,14 @@ public class User_Dto implements MapperInterface<T_User>
 		this.age = age;
 	}
 
+	public T_Membership getMembership() {
+		return membership;
+	}
+
+	public void setMembership(T_Membership membership) {
+		this.membership = membership;
+	}
+
 	/*
 		Zona de Implementaciones de interfaces
 	*/
@@ -113,6 +124,7 @@ public class User_Dto implements MapperInterface<T_User>
 			this.secondLastName = entity.getSecondLastName();
 			this.email = entity.getEmail();
 			this.age = entity.getAge();
+			this.membership = entity.getMembership();
 		}
 		catch (Exception e) 
 		{
